@@ -3,5 +3,13 @@ class QuizModel {
   List<String> answers;
   String correctAnswer;
 
-  QuizModel(this.question, this.answers,this.correctAnswer);
+  //swap answer
+  List<String> getShuffledAnswers() {
+    final shuffleAnswers = List.of(answers);
+
+    shuffleAnswers.shuffle();
+    return shuffleAnswers;
+  }
+
+  QuizModel(this.question, this.answers, this.correctAnswer);
 }

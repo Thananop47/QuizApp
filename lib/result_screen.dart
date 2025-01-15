@@ -4,7 +4,8 @@ import 'package:myapp/models/quiz_model.dart';
 import 'package:myapp/questions_screen.dart';
 
 class ResultScreen extends StatelessWidget {
-  const ResultScreen({ //create constant to receiving required value
+  const ResultScreen({
+    //create constant to receiving required value
     required this.score,
     required this.total,
     required this.questions,
@@ -14,7 +15,7 @@ class ResultScreen extends StatelessWidget {
 
   final int score;
   final int total;
-  final List<QuizModel> questions;  // ใช้ประเภทของข้อมูลคำถาม
+  final List<QuizModel> questions; // ใช้ประเภทของข้อมูลคำถาม
   final List<String> selectedAnswers;
 
   @override
@@ -22,7 +23,6 @@ class ResultScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          
           gradient: LinearGradient(
             begin: Alignment.bottomRight,
             end: Alignment.topLeft,
@@ -35,7 +35,9 @@ class ResultScreen extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const SizedBox(height: 20,),
+                const SizedBox(
+                  height: 20,
+                ),
                 Text(
                   "You answered $score out of $total questions correctly!",
                   style: const TextStyle(color: Colors.white, fontSize: 20),
@@ -49,38 +51,29 @@ class ResultScreen extends StatelessWidget {
                       final question = questions[index];
                       final selectedAnswer = selectedAnswers[index];
                       final correctAnswer = question.correctAnswer;
-                      return Container(
-                        margin: const EdgeInsets.symmetric(vertical: 5),
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: Colors.black.withOpacity(0.3),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Q${index + 1}: ${question.question}',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Q${index + 1}: ${question.question}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
                             ),
-                            const SizedBox(height: 1),
-                            Text(
-                              'Your answer: $selectedAnswer',
-                              style: TextStyle(
-                                color: selectedAnswer == correctAnswer
-                                    ? Colors.green
-                                    : Colors.red,
-                              ),
+                          ),
+                          const SizedBox(height: 1),
+                          Text(
+                            'Your answer: $selectedAnswer',
+                            style: const TextStyle(
+                              color: Colors.yellow,
                             ),
-                            Text(
-                              'Correct answer: $correctAnswer',
-                              style: const TextStyle(color: Colors.blue),
-                            ),
-                          ],
-                        ),
+                          ),
+                          Text(
+                            'Correct answer: $correctAnswer',
+                            style: const TextStyle(color: Colors.amber),
+                          ),
+                          const SizedBox(height: 10,),
+                        ],
                       );
                     },
                   ),

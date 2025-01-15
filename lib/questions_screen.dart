@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myapp/answers_button.dart';
 import 'package:myapp/data/quiz.dart';
 import 'package:myapp/result_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({super.key});
@@ -29,10 +30,11 @@ class _QuestionsState extends State<QuestionsScreen> {
       setState(() {
         questionIndex++;
       });
-    } else { 
+    } else {
       Navigator.push(
         context,
-        MaterialPageRoute( // send all required value to resultScreen
+        MaterialPageRoute(
+          // send all required value to resultScreen
           builder: (context) => ResultScreen(
               score: score,
               total: questions.length,
@@ -51,6 +53,8 @@ class _QuestionsState extends State<QuestionsScreen> {
         body: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
               colors: [Colors.purple, Colors.deepPurple],
             ),
           ),
@@ -62,13 +66,17 @@ class _QuestionsState extends State<QuestionsScreen> {
                 children: [
                   Text(
                     currentQuestion.question,
-                    style: const TextStyle(color: Colors.white),
+                    style: GoogleFonts.lato(
+                      color: const Color.fromARGB(255, 201, 153, 251),
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
                     height: 30,
                   ),
-                  ...currentQuestion.answers.map((answer) {
+                  ...currentQuestion.getShuffledAnswers().map((answer) {
                     return AnswersButton(answer, handleAnswer);
                   }),
                 ],
